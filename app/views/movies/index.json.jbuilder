@@ -1,3 +1,1 @@
-json.array! @movies do |movie|
-  json.partial! 'movie', movie: movie
-end
+json.partial! 'contents/contents', contents: @movies

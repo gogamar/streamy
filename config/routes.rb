@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   resources :users do
     get 'library', on: :member
+    resources :contents, only: [:index, :show]
     resources :movies, only: [:index]
-    resources :seasons, only: [:index]
-    resources :contents, only: [:index]
-    resources :purchases, only: [:show, :create]
+    resources :seasons, only: [:index] do
+      resources :episodes, only: [:show]
+    end
+    resources :purchases, only: [:create]
   end
 
   root 'endpoints#index'

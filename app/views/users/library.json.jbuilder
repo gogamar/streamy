@@ -1,6 +1,6 @@
-json.user_id @user.id
-json.user_email @user.email
+json.user_id @current_user.id
+json.user_email @current_user.email
 
 json.active_purchases do
-  json.array! @active_purchases, partial: 'purchases/purchase', as: :purchase
+  json.array! @active_purchases, partial: 'shared/purchase', as: :purchase
 end

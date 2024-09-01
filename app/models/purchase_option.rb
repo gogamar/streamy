@@ -1,4 +1,5 @@
 class PurchaseOption < ApplicationRecord
+  has_many :purchases, dependent: :destroy
   has_and_belongs_to_many :movies, join_table: 'movies_purchase_options'
   has_and_belongs_to_many :seasons, join_table: 'seasons_purchase_options'
 

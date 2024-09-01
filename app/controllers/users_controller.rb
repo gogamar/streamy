@@ -1,12 +1,8 @@
 class UsersController < ApplicationController
   def library
-    @user = User.find(params[:id])
-
+    @current_user = User.find_by(id: params[:id])
     # Fetch only active purchases and order them by expiration time (ascending)
-    @active_purchases = @user.purchases
-                             .where('expiration_time > ?', Time.current)
-                             .includes(content: :episodes)
-                             .order(:expiration_time)
+    @active_purchases = @current_user.active_purchases
 
     render :library, formats: :json
   end
