@@ -1,13 +1,20 @@
 class User < ApplicationRecord
-  # for the sake of testing we will destroy purchases if we need to destroy users
   has_many :purchases, dependent: :destroy
   has_many :purchase_options, through: :purchases
 
   validates :email, presence: true, uniqueness: true
 
-  def active_purchase_exists?(content_id, content_type)
-    purchases.where(content_id: content_id, content_type: content_type)
-             .where('expiration_time > ?', Time.current)
-             .exists?
+  def active_purchases
+    purchases
+      .where('expiration_time > ?', Time.current)
+      .includes(content: :episodes)
+      .order(:expiration_time)
+  end
+
+  def active_purchase?(content)
+    active_purchases.where(
+      content_id: content.id,
+      content_type: content.class.name
+    ).exists?
   end
 end

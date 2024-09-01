@@ -8,7 +8,7 @@ class Purchase < ApplicationRecord
   private
 
   def disallow_duplicate_purchase
-    if user.active_purchase_exists?(content_id, content_type)
+    if user.active_purchase?(content)
       errors.add(:base, 'You have already purchased this content.')
     end
   end

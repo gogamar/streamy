@@ -47,16 +47,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_01_101502) do
   end
 
   create_table "purchases", force: :cascade do |t|
-    t.string "content_type", null: false
-    t.bigint "content_id", null: false
     t.decimal "price"
     t.string "video_quality"
-    t.string "expiration_time"
+    t.datetime "expiration_time"
+    t.bigint "user_id", null: false
     t.bigint "purchase_option_id", null: false
+    t.string "content_type", null: false
+    t.bigint "content_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content_type", "content_id"], name: "index_purchases_on_content"
     t.index ["purchase_option_id"], name: "index_purchases_on_purchase_option_id"
+    t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 
   create_table "seasons", force: :cascade do |t|
@@ -85,6 +87,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_01_101502) do
   add_foreign_key "movies_purchase_options", "movies"
   add_foreign_key "movies_purchase_options", "purchase_options"
   add_foreign_key "purchases", "purchase_options"
+  add_foreign_key "purchases", "users"
   add_foreign_key "seasons_purchase_options", "purchase_options"
   add_foreign_key "seasons_purchase_options", "seasons"
 end
