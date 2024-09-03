@@ -31,4 +31,8 @@ class ContentsController < ApplicationController
     Rails.logger.error("Failed to fetch content: #{e.message}")
     render json: { error: 'An error occurred while fetching content.' }, status: :internal_server_error
   end
+
+  def clear_cache
+    Rails.cache.delete("contents/all")
+  end
 end

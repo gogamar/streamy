@@ -1,9 +1,32 @@
+ContentsController.new.clear_cache
+MoviesController.new.clear_cache
+SeasonsController.new.clear_cache
+Season.all.each do |season|
+  EpisodesController.new.clear_cache(season)
+end
+
+puts "Cache cleared"
+
+User.destroy_all if User.any?
+PurchaseOption.destroy_all if PurchaseOption.any?
+Purchase.destroy_all if Purchase.any?
+Movie.destroy_all if Movie.any?
+Season.destroy_all if Season.any?
+Episode.destroy_all if Episode.any?
+
+puts "All database records have been deleted"
+
+# Create Users
 user1 = User.create!(email: "user1@example.com")
 user2 = User.create!(email: "user2@example.com")
+
+puts "#{User.count} users created"
 
 # Create Purchase Options
 option_hd = PurchaseOption.create!(price: 2.99, video_quality: "HD")
 option_sd = PurchaseOption.create!(price: 1.99, video_quality: "SD")
+
+puts "#{PurchaseOption.count} purchase options created"
 
 # Create Movies
 movie1 = Movie.create!(title: "The Matrix", plot: "A computer hacker learns about the true nature of reality.")
@@ -14,6 +37,8 @@ movie5 = Movie.create!(title: "Dune", plot: "In the distant future, noble famili
 movie6 = Movie.create!(title: "The Batman", plot: "Batman uncovers corruption in Gotham City that connects to his own family while facing the serial killer known as The Riddler.")
 movie7 = Movie.create!(title: "Everything Everywhere All at Once", plot: "A family’s adventure through multiple dimensions to save the multiverse.")
 
+puts "#{Movie.count} movies created"
+
 # Create Seasons
 season1 = Season.create!(title: "Severance - Season 1", plot: "The first season of the show where employees navigate their unique work-life balance.", number: 1)
 season2 = Season.create!(title: "The Bear - Season 1", plot: "A young chef returns to Chicago to run his family’s restaurant.", number: 1)
@@ -23,6 +48,8 @@ season5 = Season.create!(title: "Stranger Things - Season 1", plot: "A group of 
 season6 = Season.create!(title: "The Crown - Season 2", plot: "The next chapter in the life of Queen Elizabeth II.", number: 2)
 season7 = Season.create!(title: "Breaking Bad - Season 1", plot: "A high school chemistry teacher turned methamphetamine manufacturer.", number: 1)
 season8 = Season.create!(title: "The Office - Season 1", plot: "The everyday lives of office employees working at Dunder Mifflin's Scranton, PA branch.", number: 1)
+
+puts "#{Season.count} seasons created"
 
 # Create Episodes for Season 1 of Severance
 Episode.create!(title: "Episode 1", plot: "The unique severance program is introduced and employees start adjusting.", number: 1, season: season1)
@@ -72,6 +99,7 @@ Episode.create!(title: "Diversity Day", plot: "Michael Scott tries to improve di
 Episode.create!(title: "Health Care", plot: "Michael assigns Dwight the task of finding a new health care plan.", number: 3, season: season8)
 Episode.create!(title: "The Alliance", plot: "Jim and Dwight form an unlikely alliance.", number: 4, season: season8)
 
+puts "#{Episode.count} episodes created"
 
 all_movies = Movie.all
 all_movies.each do |movie|
@@ -115,3 +143,5 @@ end
 [ user1, user2 ].each do |user|
   create_random_purchases(user, all_movies, all_seasons, [option_hd, option_sd])
 end
+
+puts "#{Purchase.count} purchases created"

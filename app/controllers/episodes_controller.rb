@@ -12,7 +12,6 @@ class EpisodesController < ApplicationController
 
         @purchase = @current_user.purchases.find_by(id: params[:purchase_id]) if @episode
       else
-        # Fetch episode directly if the user is not logged in
         @episode = @season.episodes.find_by(id: params[:id])
       end
 
@@ -27,5 +26,12 @@ class EpisodesController < ApplicationController
   rescue StandardError => e
     Rails.logger.error("Failed to fetch episode: #{e.message}")
     render json: { error: 'An error occurred while fetching the episode.' }, status: :internal_server_error
+  end
+
+  def clear_cache(season)
+    episodes = season.episodes
+    episodes.each do |episode|
+      Rails.cache.delete("season/#{season.id}/episode/#{episode.id}")
+    end
   end
 end
