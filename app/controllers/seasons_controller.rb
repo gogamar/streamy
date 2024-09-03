@@ -9,4 +9,8 @@ class SeasonsController < ApplicationController
     Rails.logger.error("Failed to fetch seasons: #{e.message}")
     render json: { error: 'An error occurred while fetching seasons.' }, status: :internal_server_error
   end
+
+  def clear_cache
+    Rails.cache.delete("seasons/all")
+  end
 end

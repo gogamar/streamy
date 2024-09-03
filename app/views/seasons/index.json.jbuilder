@@ -1,1 +1,3 @@
-json.partial! 'contents/contents', contents: @seasons
+json.seasons do
+  json.partial! 'contents/contents', contents: @seasons
+end

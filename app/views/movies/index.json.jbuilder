@@ -1,1 +1,3 @@
-json.partial! 'contents/contents', contents: @movies
+json.movies do
+  json.partial! 'contents/contents', contents: @movies
+end

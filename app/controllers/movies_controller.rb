@@ -9,4 +9,8 @@ class MoviesController < ApplicationController
     Rails.logger.error("Failed to fetch movies: #{e.message}")
     render json: { error: 'An error occurred while fetching movies.' }, status: :internal_server_error
   end
+
+  def clear_cache
+    Rails.cache.delete("movies/all")
+  end
 end
