@@ -13,11 +13,11 @@ ruby "3.1.2"
 
 The following gems are required for the application:
 
-jbuilder - JSON builder for Rails.
-redis (>= 4.0.1) - Redis library for Ruby.
-factory_bot_rails - Fixtures replacement for Rails.
-rspec-rails (~> 6.1.4) - RSpec testing framework for Rails.
-dotenv-rails - Loads environment variables from .env files.
+- `jbuilder` - JSON builder for Rails.
+- `redis` (>= 4.0.1) - Redis library for Ruby.
+- `factory_bot_rails` - Fixtures replacement for Rails.
+- `rspec-rails` (~> 6.1.4) - RSpec testing framework for Rails.
+- `dotenv-rails` - Loads environment variables from `.env` files.
 
 ## Configuration
 
@@ -27,9 +27,9 @@ Make sure Redis is installed and running. Update your Redis URL in the .env file
 
 ## Configuration
 
-Run rails `db:create` to create the database.
-Run rails `db:migrate` to migrate the database.
-Run rails `db:seed` to seed the database.
+- Run `rails db:create` to create the database.
+- Run `rails db:migrate` to migrate the database.
+- Run `rails db:seed` to seed the database.
 
 ## How to run the tests
 
