@@ -7,7 +7,6 @@ The application handles movies, seasons, and episodes, letting users view and pu
 ## Ruby Version
 
 The application is built with Ruby version `3.1.2`.
-ruby "3.1.2"
 
 ## System Dependencies
 
